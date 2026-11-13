@@ -11,7 +11,7 @@ public interface MemoMapper {
     List<Memo>findAll();
 
     @Select("SELECT * FROM memo WHERE id = #{id}")
-    List<Memo>findOne(Integer id);
+    Memo findOne(Integer id);
 
     @Insert("INSERT INTO memo(title , content ,tag) VALUE(#{title},#{content},#{tag})")
     void insertOne(Memo memo);

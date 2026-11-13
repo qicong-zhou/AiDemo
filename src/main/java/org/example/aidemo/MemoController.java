@@ -13,17 +13,22 @@ public class MemoController {
     @Autowired
     MemoMapper memoMapper;
 
+    @Autowired
+    AiUtils aiUtils;
+
     @GetMapping
     public List<Memo> getAll(){
         return memoMapper.findAll();
     }
     @GetMapping("/{id}")
-    public List<Memo> getOne(@PathVariable Integer id){
+    public Memo getOne(@PathVariable Integer id){
         return memoMapper.findOne(id);
     }
     @PostMapping
-    public String add(@RequestBody Memo memo)
+    public String add(@RequestBody Memo memo) throws Exception
     {
+        String autoTag = aiUtils.aiGetTag(memo.getTitle(),memo.getContent());
+        memo.setTag(autoTag);
         memoMapper.insertOne(memo);
         return "SUCCESS";
     }
@@ -41,5 +46,7 @@ public class MemoController {
         memoMapper.deleteOne(id);
         return "SUCCESS";
     }
+
+
 
 }
