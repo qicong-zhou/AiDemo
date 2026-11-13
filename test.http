@@ -1,0 +1,29 @@
+### 1. 测试新增备忘录 (POST)
+POST http://localhost:8080/memos
+Content-Type: application/json
+
+{
+  "title": "测试独立开发",
+  "content": "我的后端终于跑通了",
+  "tag": "后端"
+}
+
+### 2. 测试查询所有 (GET)
+GET http://localhost:8080/memos
+
+### 3. 测试查询单个 (GET)
+# 假设刚才新增的数据 id 是 1
+GET http://localhost:8080/memos/1
+
+### 4. 测试修改 (PUT)
+PUT http://localhost:8080/memos/1
+Content-Type: application/json
+
+{
+  "title": "改过的标题",
+  "content": "改过的内容",
+  "tag": "修改"
+}
+
+### 5. 测试删除 (DELETE)
+DELETE http://localhost:8080/memos/1
