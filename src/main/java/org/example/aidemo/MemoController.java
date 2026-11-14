@@ -33,9 +33,11 @@ public class MemoController {
         return "SUCCESS";
     }
     @PutMapping("/{id}")
-    public String update(@PathVariable Integer id,@RequestBody Memo memo)
+    public String update(@PathVariable Integer id,@RequestBody Memo memo) throws Exception
     {
         memo.setId(id);
+        String autoTag = aiUtils.aiGetTag(memo.getTitle(),memo.getContent());
+        memo.setTag(autoTag);
         memoMapper.updateOne(memo);
         return "SUCCESS";
     }
@@ -46,7 +48,11 @@ public class MemoController {
         memoMapper.deleteOne(id);
         return "SUCCESS";
     }
-
+    @GetMapping("/search")
+    public List<Memo> searchByTag(@RequestParam("keyword") String keyword)
+    {
+        return memoMapper.findByTag(keyword);
+    }
 
 
 }

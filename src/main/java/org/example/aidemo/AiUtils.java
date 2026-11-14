@@ -18,7 +18,7 @@ public class AiUtils {
 
     public String aiGetTag(String title,String content) throws Exception{
 
-        try(HttpClient client = HttpClient.newHttpClient()) {
+            HttpClient client = HttpClient.newHttpClient();
             String prompt = "请阅读以下备忘录，提取不超过3个标签（用逗号隔开，不要其他任何废话）。标题：" + title + "，正文：" + content;
 
             String jsonBody = """
@@ -37,6 +37,6 @@ public class AiUtils {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(response.body());
             return root.get("choices").get(0).get("message").get("content").asString();
-        }
+
     }
 }

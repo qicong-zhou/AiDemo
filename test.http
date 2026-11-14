@@ -27,3 +27,9 @@ Content-Type: application/json
 
 ### 5. 测试删除 (DELETE)
 DELETE http://localhost:8080/memos/1
+
+### 6. 测试删除 (DELETE)
+DELETE http://localhost:8080/memos/2
+
+### 7.测试按关键词搜索
+GET http://localhost:8080/memos/search?keyword=后端
