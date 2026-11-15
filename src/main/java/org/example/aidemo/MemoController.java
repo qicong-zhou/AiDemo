@@ -53,6 +53,11 @@ public class MemoController {
     {
         return memoMapper.findByTag(keyword);
     }
+    @GetMapping("/tags")
+    public List<TagCount> getCount()
+    {
+        return memoMapper.countTags();
+    }
 
 
 }

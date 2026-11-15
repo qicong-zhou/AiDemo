@@ -25,4 +25,7 @@ public interface MemoMapper {
 
     @Select("SELECT * FROM memo WHERE title LIKE CONCAT('%',#{keyword},'%') OR content LIKE CONCAT('%',#{keyword},'%') OR tag LIKE CONCAT('%',#{keyword},'%')")
     List<Memo>findByTag(@Param("keyword") String keyword);
+
+    @Select("SELECT tag,COUNT(*) AS count FROM memo WHERE tag != '' AND tag IS NOT NULL GROUP BY tag")
+    List<TagCount>countTags();
 }

@@ -16,7 +16,7 @@ GET http://localhost:8080/memos
 GET http://localhost:8080/memos/1
 
 ### 4. 测试修改 (PUT)
-PUT http://localhost:8080/memos/1
+PUT http://localhost:8080/memos/6
 Content-Type: application/json
 
 {
@@ -33,3 +33,6 @@ DELETE http://localhost:8080/memos/2
 
 ### 7.测试按关键词搜索
 GET http://localhost:8080/memos/search?keyword=后端
+
+### 8.计算不同标签个数
+GET http://localhost:8080/memos/tags
