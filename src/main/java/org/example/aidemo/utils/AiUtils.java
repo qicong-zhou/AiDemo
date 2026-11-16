@@ -19,7 +19,7 @@ public class AiUtils {
     public String aiGetTag(String title,String content) throws Exception{
 
             HttpClient client = HttpClient.newHttpClient();
-            String prompt = "请阅读备忘录，提取不超过3个标签，用英文逗号隔开，禁止输出废话。示例：工作,生活。内容：" + title + "，" + content;
+            String prompt = "请阅读备忘录，提取不超过3个标签，用英文逗号隔开，禁止输出废话。示例：工作,生活,天气。内容：" + title + "，" + content;
 
             String jsonBody = """
                     {"model":"deepseek-chat",
