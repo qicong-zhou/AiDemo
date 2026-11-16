@@ -56,4 +56,10 @@ public class MemoServiceImpl implements MemoService {
     public List<TagCount> getCount() {
         return memoMapper.countTags();
     }
+
+    @Override
+    public List<Memo> findByPage(Integer page, Integer size) {
+        int offset = (page - 1) * size;
+        return memoMapper.findByPage(offset,size);
+    }
 }

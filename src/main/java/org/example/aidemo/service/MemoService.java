@@ -15,4 +15,5 @@ public interface MemoService {
     void delete(Integer id);
     List<Memo>searchByTag(String keyword);
     List<TagCount>getCount();
+    List<Memo>findByPage(Integer page,Integer size);
 }

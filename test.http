@@ -36,3 +36,12 @@ GET http://localhost:8080/memos/search?keyword=后端
 
 ### 8.计算不同标签个数
 GET http://localhost:8080/memos/tags
+
+### 9. 不传参数（默认第1页，拿10条）
+GET http://localhost:8080/memos/page
+
+### 10. 只传页码（默认第2页，拿10条）
+GET http://localhost:8080/memos/page?page=2
+
+### 11. 自己定义（看第1页，只拿3条）
+GET http://localhost:8080/memos/page?page=1&size=3

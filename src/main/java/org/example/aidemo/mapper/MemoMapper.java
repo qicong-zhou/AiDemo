@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface MemoMapper {
 
-    @Select("SELECT * FROM memo")
+    @Select("SELECT * FROM memo ORDER BY id DESC")
     List<Memo>findAll();
 
     @Select("SELECT * FROM memo WHERE id = #{id}")
@@ -29,4 +29,7 @@ public interface MemoMapper {
 
     @Select("SELECT tag,COUNT(*) AS count FROM memo WHERE tag != '' AND tag IS NOT NULL GROUP BY tag")
     List<TagCount>countTags();
+
+    @Select("SELECT * FROM memo ORDER BY id DESC LIMIT #{offset},#{size}")
+    List<Memo>findByPage(@Param("offset")Integer offset,@Param("size")Integer size);
 }
