@@ -1,4 +1,4 @@
-package org.example.aidemo;
+package org.example.aidemo.entity;
 
 public class TagCount {
     private String tag;

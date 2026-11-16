@@ -1,7 +1,8 @@
-package org.example.aidemo;
+package org.example.aidemo.mapper;
 
 import org.apache.ibatis.annotations.*;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.example.aidemo.entity.Memo;
+import org.example.aidemo.entity.TagCount;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface MemoMapper {
     @Select("SELECT * FROM memo WHERE id = #{id}")
     Memo findOne(Integer id);
 
-    @Insert("INSERT INTO memo(title , content ,tag) VALUE(#{title},#{content},#{tag})")
+    @Insert("INSERT INTO memo(title , content ,tag) VALUES (#{title},#{content},#{tag})")
     void insertOne(Memo memo);
 
     @Update("UPDATE memo SET title = #{title},content = #{content},tag = #{tag} WHERE id = #{id}")

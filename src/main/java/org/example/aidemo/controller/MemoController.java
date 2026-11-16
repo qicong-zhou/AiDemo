@@ -1,6 +1,10 @@
-package org.example.aidemo;
+package org.example.aidemo.controller;
 
-import org.apache.ibatis.annotations.Delete;
+import org.example.aidemo.entity.Memo;
+import org.example.aidemo.mapper.MemoMapper;
+import org.example.aidemo.entity.TagCount;
+import org.example.aidemo.service.MemoService;
+import org.example.aidemo.utils.AiUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,52 +15,43 @@ import java.util.List;
 public class MemoController {
 
     @Autowired
-    MemoMapper memoMapper;
-
-    @Autowired
-    AiUtils aiUtils;
+    MemoService memoService;
 
     @GetMapping
     public List<Memo> getAll(){
-        return memoMapper.findAll();
+        return memoService.getAll();
     }
     @GetMapping("/{id}")
     public Memo getOne(@PathVariable Integer id){
-        return memoMapper.findOne(id);
+        return memoService.getOne(id);
     }
     @PostMapping
     public String add(@RequestBody Memo memo) throws Exception
     {
-        String autoTag = aiUtils.aiGetTag(memo.getTitle(),memo.getContent());
-        memo.setTag(autoTag);
-        memoMapper.insertOne(memo);
+        memoService.add(memo);
         return "SUCCESS";
     }
     @PutMapping("/{id}")
     public String update(@PathVariable Integer id,@RequestBody Memo memo) throws Exception
     {
-        memo.setId(id);
-        String autoTag = aiUtils.aiGetTag(memo.getTitle(),memo.getContent());
-        memo.setTag(autoTag);
-        memoMapper.updateOne(memo);
+        memoService.update(id,memo);
         return "SUCCESS";
     }
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Integer id)
     {
-
-        memoMapper.deleteOne(id);
+        memoService.delete(id);
         return "SUCCESS";
     }
     @GetMapping("/search")
     public List<Memo> searchByTag(@RequestParam("keyword") String keyword)
     {
-        return memoMapper.findByTag(keyword);
+        return memoService.searchByTag(keyword);
     }
     @GetMapping("/tags")
     public List<TagCount> getCount()
     {
-        return memoMapper.countTags();
+        return memoService.getCount();
     }
 
 

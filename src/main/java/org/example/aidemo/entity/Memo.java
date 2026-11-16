@@ -1,4 +1,4 @@
-package org.example.aidemo;
+package org.example.aidemo.entity;
 
 import java.time.LocalDateTime;
 

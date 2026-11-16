@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 ### 5. 测试删除 (DELETE)
-DELETE http://localhost:8080/memos/1
+DELETE http://localhost:8080/memos/7
 
 ### 6. 测试删除 (DELETE)
 DELETE http://localhost:8080/memos/2
