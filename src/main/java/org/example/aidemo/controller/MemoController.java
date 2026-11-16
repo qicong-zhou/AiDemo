@@ -54,7 +54,7 @@ public class MemoController {
         return memoService.getCount();
     }
     @GetMapping("/page")
-    public List<Memo> getByPage(@RequestParam(value = "page",defaultValue = "1")Integer page,@RequestParam(value = "size",defaultValue = "10")Integer size){
+    public List<Memo> getByPage(@RequestParam(value = "page",defaultValue = "1")Integer page,@RequestParam(value = "size",defaultValue = "20")Integer size){
         return memoService.findByPage(page,size);
     }
 
