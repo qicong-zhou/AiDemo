@@ -9,6 +9,9 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
+
 @Component
 public class AiUtils {
 
@@ -20,13 +23,15 @@ public class AiUtils {
 
             HttpClient client = HttpClient.newHttpClient();
             String prompt = "请阅读备忘录，提取不超过3个标签，用英文逗号隔开，禁止输出废话。示例：工作,生活,天气。内容：" + title + "，" + content;
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String, String> message = Map.of(
+                "role", "user",
+                "content", prompt);
+            Map<String, Object> body = Map.of(
+                "model", "deepseek-chat",
+                "messages", List.of(message));
 
-            String jsonBody = """
-                    {"model":"deepseek-chat",
-                    "messages":[
-                    {"role":"user","content":"%s"}
-                    ]}
-                    """.formatted(prompt);
+            String jsonBody = mapper.writeValueAsString(body);
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("https://api.deepseek.com/chat/completions"))
                     .header("Content-Type", "application/json")
@@ -34,7 +39,7 @@ public class AiUtils {
                     .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            ObjectMapper mapper = new ObjectMapper();
+
             JsonNode root = mapper.readTree(response.body());
             String aiReply = root.get("choices").get(0).get("message").get("content").asString();
             return aiReply.replaceAll("[^\\u4e00-\\u9fa5,]", "");
